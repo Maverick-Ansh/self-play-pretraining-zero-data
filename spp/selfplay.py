@@ -158,7 +158,7 @@ def run(cfg: Config):
             learner.eval()
             ev = {c: bpb(learner, a) for c, a in evalset.items()}
             learner.train()
-            rec = dict(kind="eval", round=e, tokens=tokens, compute=6 * n_params * tokens, bpb=ev,
+            rec = dict(kind="eval", round=e, tokens=tokens, compute=n_params * tokens, bpb=ev,
                        wall=time.time() - t_start)
             if selfplay:
                 progs, _, _ = G.sample(gen, 32, cfg.max_body)
