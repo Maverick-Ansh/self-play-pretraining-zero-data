@@ -61,7 +61,7 @@ def rope(positions, head_dim, dtype):
 
 def rotate(x, cos, sin):
     h = x.shape[-1] // 2
-    return x * cos + torch.cat((-x[..., h:], x[..., :h]), -1) * sin
+    return (x * cos + torch.cat((-x[..., h:], x[..., :h]), -1) * sin).to(x.dtype)
 
 
 class Attention(nn.Module):
