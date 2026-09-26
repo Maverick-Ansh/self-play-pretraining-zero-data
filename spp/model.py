@@ -9,7 +9,8 @@
      whereas output sequences may contain any byte value."               (Sec. 2.3)
 
 Block anatomy, identical to the authors' released inference class
-(nourya-aliz/Solomonoff-Figures, scoring/src/framework/model.py), with the same
+(nourya-aliz/Solomonoff-Figures, scoring/src/framework/model.py; that repo went
+404 on 2026-09-26, after this was written against it), with the same
 parameter names so their checkpoints load directly:
 
     bytes -> wte -> [ x + Attn(RMSNorm(x)) ; x + SwiGLU(RMSNorm(x)) ] x L -> RMSNorm -> lm_head

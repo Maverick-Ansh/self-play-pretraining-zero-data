@@ -13,8 +13,8 @@ Any byte model that beats it is using something beyond "count what you have
 seen so far"; any gap it does NOT close is transfer that in-context counting
 alone already explains.
 
-ICL tasks (App. D), formats copied from the authors' harness
-(Solomonoff-Figures/figures/fig5_icl_sum_behavior/icl_harness), with the same
+ICL tasks (App. D), formats copied from the authors' ICL harness (released in
+nourya-aliz/Solomonoff-Figures, which has since gone 404), with the same
 cells the paper plots: reverse k=8 (teacher-forced), stack L=4, assoc V=16,
 sum/max/min k=2. Sentinel 0 before each example; greedy exact match.
 """

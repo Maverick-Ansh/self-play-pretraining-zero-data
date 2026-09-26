@@ -6,8 +6,7 @@
      additionally require a minimal period of at least 30."             (App. C)
 
 `min_period` and `classify_record` are copied verbatim from the authors'
-detector (nourya-aliz/Solomonoff-Figures, figures/table1_discovered_structures/
-detect.py) so that "discovered" means exactly the same thing here as in the
+detector (acowsik/self_play_pretraining, tables/table1/detect.py) so that "discovered" means exactly the same thing here as in the
 paper. `scan` adds a vectorized prefilter so every round's pool can be checked:
 a row can only be a hit if its core x[30:] satisfies one of the recurrences.
 """

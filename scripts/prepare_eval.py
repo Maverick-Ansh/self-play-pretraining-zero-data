@@ -1,7 +1,7 @@
 """Build the held-out evaluation corpora with the authors' own bake scripts.
 
 Every corpus is baked at the paper's context (4096 -> 4095-byte windows) by the
-pinned, checksummed scripts in nourya-aliz/Solomonoff-Figures/scoring, so the
+pinned, checksummed scripts in acowsik/self_play_pretraining/datasets, so the
 bytes are identical to the paper's. They are then written twice:
 
     data/c4096/<name>.npy  uint8[<=256, 4095]  scoring the released checkpoints (smoke gate)
@@ -18,15 +18,15 @@ import sys
 
 import numpy as np
 
-EXT = "ext/Solomonoff-Figures"
-SCORING = f"{EXT}/scoring"
+EXT = "ext/self_play_pretraining"
+SCORING = f"{EXT}/datasets"
 BAKES = {                                   # our name -> bake command (run inside scoring/)
     "dclm": "prepare_dclm_benchmark --num-sequences 256",
     "cifar10_rgb_hwc": "prepare_cifar10_benchmark --datasets cifar10_rgb_hwc --num-sequences 256",
     "mutopia_melody_16th": "prepare_mutopia_benchmark",
     "arithmetic": "prepare_arithmetic_benchmark --num-samples 256",
 }
-PREBAKED = ["dna", "audio_8bit", "dclm_ranked"]          # shipped already baked in scoring/data/c4096
+PREBAKED = ["dna", "audio_8bit", "dclm_ranked"]          # shipped already baked in datasets/data/c4096
 
 
 def sh(cmd, cwd=None):
@@ -53,7 +53,7 @@ def rewindow(a, w=511, n=256):
 
 def main():
     if not os.path.isdir(EXT):
-        sh(f"git clone -q --depth 1 https://github.com/nourya-aliz/Solomonoff-Figures {EXT}")
+        sh(f"git clone -q --depth 1 https://github.com/acowsik/self_play_pretraining {EXT}")
     sh(f"{sys.executable} -m pip -q install zstandard mido requests")
     os.makedirs("data/c4096", exist_ok=True)
     os.makedirs("data/c512", exist_ok=True)
