@@ -1,6 +1,9 @@
-"""Run a list of self-play runs sequentially on one GPU. Finished runs (final.json) are skipped.
+"""(Named run_queue, not queue: scripts/ is sys.path[0], and a file called queue.py
+shadows the stdlib module that torch imports.)
 
-    python scripts/queue.py --gpu 0 --runs "1M:selfplay:0:2048" "1M:uniform:0:2048"
+Run a list of self-play runs sequentially on one GPU. Finished runs (final.json) are skipped.
+
+    python scripts/run_queue.py --gpu 0 --runs "1M:selfplay:0:2048" "1M:uniform:0:2048"
 
 Each spec is rung:arm:seed:rounds. Launch one detached queue per GPU.
 """
