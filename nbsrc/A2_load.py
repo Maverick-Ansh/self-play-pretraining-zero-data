@@ -1,5 +1,5 @@
 # 10.0  Load every run; one figure style for the whole section.
-import matplotlib, matplotlib.pyplot as plt
+import csv, matplotlib, matplotlib.pyplot as plt
 from spp.analysis import load_runs, points, frontier, fit, power_law
 ARM_COLOR = {"selfplay": "#2a78d6", "uniform": "#eb6834", "shuffle": "#1baf7a"}
 ARM_NAME = {"selfplay": "self-play", "uniform": "uniform prior", "shuffle": "shuffled reward"}
