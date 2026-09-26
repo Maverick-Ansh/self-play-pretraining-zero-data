@@ -62,8 +62,8 @@ class Config:
     warmup: int = 32
     wd: float = 0.1
     snap_every: int = 8
-    micro: int = 64               # learner micro-batch (grad accumulation)
-    reward_chunk: int = 64
+    micro: int = 256              # learner micro-batch (the whole pool: these models are launch-bound)
+    reward_chunk: int = 128       # JVP rows per forward (fp32 explicit attention)
     eval_every: int = 128
     eval_seqs: int = 64
     eval_dir: str = "data/c512"
