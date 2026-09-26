@@ -57,6 +57,12 @@ def main():
     sh(f"{sys.executable} -m pip -q install zstandard mido requests")
     os.makedirs("data/c4096", exist_ok=True)
     os.makedirs("data/c512", exist_ok=True)
+    cifar = f"{SCORING}/data/raw_sources/cifar10_test_batch.bin"    # the bake script is offline by design
+    if not os.path.exists(cifar):
+        os.makedirs(os.path.dirname(cifar), exist_ok=True)
+        sh("curl -sL -o /tmp/cifar.tgz https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz && "
+           "echo 'c32a1d4ab5d03f1284b67883e8d87530  /tmp/cifar.tgz' | md5sum -c - && "
+           f"tar -xzf /tmp/cifar.tgz -O cifar-10-batches-bin/test_batch.bin > {cifar}")
     for name, cmd in BAKES.items():
         path = f"{SCORING}/data/c4096/{name}.jsonl"
         if not os.path.exists(path):
