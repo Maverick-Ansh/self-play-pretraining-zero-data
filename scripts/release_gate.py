@@ -31,6 +31,8 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--rung", default="1M")
 ap.add_argument("--round", type=int, default=16383)
 ap.add_argument("--n_seq", type=int, default=256)
+ap.add_argument("--data", default="data/c4096")
+ap.add_argument("--corpora", default=",".join(CORPORA))
 args = ap.parse_args()
 
 published = {r["corpus"]: float(r["bpb"]) for r in csv.DictReader(open(CSV))
@@ -38,7 +40,8 @@ published = {r["corpus"]: float(r["bpb"]) for r in csv.DictReader(open(CSV))
 tree = json.load(urllib.request.urlopen(
     f"https://huggingface.co/api/models/nourya-cohen/solomonoff-paper/tree/main/{args.rung}"))
 seeds = [t["path"].split("/")[-1] for t in tree]
-data = {c: np.load(f"data/c4096/{c}.npy")[:args.n_seq] for c in CORPORA}
+CORPORA = args.corpora.split(",")
+data = {c: np.load(f"{args.data}/{c}.npy")[:args.n_seq] for c in CORPORA}
 per_seed = {c: [] for c in CORPORA}
 for s in seeds:
     try:
@@ -65,4 +68,4 @@ for c in CORPORA:
     res[c] = dict(ours=float(v.mean()), sd=float(v.std()), published=published.get(c), n_seeds=len(v))
     print(f"  {c:22s} {v.mean():.3f} ± {v.std():.3f}   published {published.get(c, float('nan')):.3f}   "
           f"diff {v.mean() - published.get(c, float('nan')):+.3f}")
-json.dump(res, open(f"data/release_gate_{args.rung}_{args.round}.json", "w"), indent=1)
+json.dump(res, open(f"{args.data}/release_gate_{args.rung}_{args.round}.json", "w"), indent=1)
