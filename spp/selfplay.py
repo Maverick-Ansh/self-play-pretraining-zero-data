@@ -147,7 +147,7 @@ def run(cfg: Config):
         archive, bank, snaps = Archive(), ReplayBank(), Snapshots(cfg.snap_every)
     evalset = load_corpora(cfg.eval_dir, cfg.eval_seqs) if os.path.isdir(cfg.eval_dir) else {}
     first_seen, hit_counts = {}, {f: 0 for f in FAMILIES}
-    logf = open(f"{cfg.out}/log.jsonl", "a")
+    logf = open(f"{cfg.out}/log.jsonl", "w")                  # an unfinished run restarts from scratch
     n_params = learner.n_params()
     tokens = 0
     t_start = time.time()
