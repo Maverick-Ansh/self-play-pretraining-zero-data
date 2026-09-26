@@ -2,8 +2,8 @@
 
 Bits per byte (Sec. 3.1, App. B). The authors' scorer: input = byte 'O' + the
 corpus window, loss = mean -log2 p(next byte) over every data byte. Reproduced
-exactly here; smoke.py checks that it returns their published numbers on their
-released weights.
+exactly here: scripts/release_gate.py scores their released 1M weights with this
+code and gets their published numbers to 3 decimals on all 7 corpora.
 
 A floor for "transfer". The paper compares self-play to two other *trained*
 distributions (uniform prior, PCFG). It does not compare to a predictor that
