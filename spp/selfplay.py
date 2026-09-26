@@ -154,7 +154,7 @@ def run(cfg: Config):
 
     for e in range(cfg.rounds + 1):
         # -------------------------------------------------- evaluation (before round e's update)
-        if e % cfg.eval_every == 0 or e == cfg.rounds:
+        if e % cfg.eval_every == 0 or e in (8, 16, 32, 64) or e == cfg.rounds:   # log-spaced early points
             learner.eval()
             ev = {c: bpb(learner, a) for c, a in evalset.items()}
             learner.train()
