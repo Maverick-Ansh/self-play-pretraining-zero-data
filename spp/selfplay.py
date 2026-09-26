@@ -145,7 +145,7 @@ def run(cfg: Config):
                                   betas=(0.9, 0.95), weight_decay=0.0)
         sc_g = torch.amp.GradScaler()
         archive, bank, snaps = Archive(), ReplayBank(), Snapshots(cfg.snap_every)
-    evalset = load_corpora(cfg.eval_dir, cfg.eval_seqs)
+    evalset = load_corpora(cfg.eval_dir, cfg.eval_seqs) if os.path.isdir(cfg.eval_dir) else {}
     first_seen, hit_counts = {}, {f: 0 for f in FAMILIES}
     logf = open(f"{cfg.out}/log.jsonl", "a")
     n_params = learner.n_params()
