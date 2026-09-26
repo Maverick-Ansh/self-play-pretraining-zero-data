@@ -61,7 +61,7 @@ for s in seeds:
         per_seed[c].append(tot / (len(X) * (X.shape[1] - 1)) / math.log(2))
     print(f"{s}: " + " ".join(f"{c[:8]}={per_seed[c][-1]:.3f}" for c in CORPORA), flush=True)
 
-print(f"\n{args.rung} round {args.round}, {len(per_seed['dna'])} seeds: ours (mean ± sd over seeds) vs published K=1")
+print(f"\n{args.rung} round {args.round}, {len(next(iter(per_seed.values())))} seeds: ours (mean ± sd over seeds) vs published K=1")
 res = {}
 for c in CORPORA:
     v = np.array(per_seed[c])
