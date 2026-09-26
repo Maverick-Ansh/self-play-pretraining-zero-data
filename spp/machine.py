@@ -22,10 +22,14 @@ the same 256-way embedding table serves programs and outputs alike.
 Two numbers the paper leaves open are fixed here and flagged in REPORT.md:
     TAPE_CELLS  = 2048   The paper says only "finite memory". Replaying the 6143
                          deterministic programs in the authors' released hits.jsonl:
-                         2048 cells reproduces all 6143 recorded first terms and 190/191
-                         full-tape family labels. 128 also matches the first terms but
-                         breaks 35 long right-moving tapes at the wrap; 4096 / 8192 /
-                         30000 each miss a left-wrapping "tape-size detector" program.
+                           128 cells  all 6143 recorded first bytes; 35 of 5955 arithmetic
+                                      tapes leave their recurrence after the head wraps
+                           2048 cells all 6143 first bytes; 33 of 5955 leave it
+                           4096 cells all 5955 stay arithmetic; 3 first-byte records missed
+                                      (programs that walk LEFT and wrap)
+                         No single circular size reproduces every record, so the authors'
+                         tape is not a plain circular array of one size. 2048 disagrees
+                         with it only for programs whose head wraps (0.5% of the hits).
     step budget = 2048*(T+1): the released hits need up to 2031 steps/byte (max
                  8,319,126 < 2^23 = 2048*4096), so the paper's budget is >= that
 """
