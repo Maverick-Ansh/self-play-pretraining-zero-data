@@ -149,8 +149,8 @@ ICL_MS = [0, 1, 2, 4, 8, 16, 32, 64, 120]
 def icl_accuracy(model, name, m, trials=128, seed=0, ctx=512):
     """Greedy exact-match accuracy at the answer positions (mean over slots and trials)."""
     rng = np.random.default_rng(seed)
-    rows = [icl_task(name, m, rng, ctx) for _ in range(trials)]
-    if rows[0] is None:
+    rows = [r for r in (icl_task(name, m, rng, ctx) for _ in range(trials)) if r is not None]
+    if not rows:                                            # this m does not fit the context
         return None
     dev = model.wte.weight.device
     by_len = {}
