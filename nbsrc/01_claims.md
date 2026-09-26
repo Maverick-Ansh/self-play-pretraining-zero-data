@@ -6,7 +6,7 @@
 | **C2** | Self-play beats the *non-adaptive* universal prior over the **same** program space | Fig. 2, §3.1 | at equal size and tokens, self-play < uniform-prior bits/byte beyond seed spread |
 | **C3** | What the reward says about each program matters, not just its distribution | Table 5 (`shuffle`) | permuting rewards across the pool loses to the canonical reward beyond seed spread |
 | **C4** | The learner learns in context on tasks it never saw; the uniform-prior learner does not | Fig. 1, Fig. 4 | exact-match accuracy rises with the number of demonstrations $m$ for self-play, not for uniform |
-| **C5** | The generator finds Fibonacci / geometric / quadratic / cubic sequences far sooner than uniform sampling | Table 1 | non-arithmetic families appear in self-play pools; none in the same number of uniform programs |
+| **C5** | The generator finds Fibonacci / geometric / quadratic / cubic sequences far sooner than uniform sampling | Table 1 | self-play pools contain these families at a rate well above the rate $g_0$ produces them by chance at the same tape length (measured on 10M programs) |
 
 **The primary comparison is C2.** Self-play and the uniform prior differ in exactly one thing (whether the program distribution adapts to the learner); machine, alphabet, learner, pool size and token budget are identical.
 
